@@ -1,17 +1,13 @@
 package com.parameta.parametaEmployees.converters;
 
-
 import com.parameta.parametaEmployees.entities.EmployeesEntity;
 import com.parameta.parametaEmployees.soap.Employee;
+import com.parameta.parametaEmployees.utils.Utilities;
 
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
 
 
 @Component
@@ -32,30 +28,17 @@ public class EmployeeConverter {
 
     public Employee convertEmployeeEntityToEmployee(EmployeesEntity employeesEntity) {
     	
-    	try {
-    	
-    	GregorianCalendar birthDate = new GregorianCalendar();
-    	birthDate.setTime(employeesEntity.getBirthDate());
-    	
-    	GregorianCalendar employmentDate = new GregorianCalendar();
-    	employmentDate.setTime(employeesEntity.getEmploymentDate());
-    	
         Employee employee = new Employee();
         employee.setDocumentNumber(employeesEntity.getDocumentNumber());
         employee.setFirstName(employeesEntity.getFirstName());
         employee.setLastName(employeesEntity.getLastName());
         employee.setDocumentType(employeesEntity.getDocumentType());
-        employee.setBirthDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(birthDate));
-		employee.setEmploymentDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(employmentDate));
+        employee.setBirthDate(Utilities.convertDateToXMLGregorianCalendar(employeesEntity.getBirthDate()));
+		employee.setEmploymentDate(Utilities.convertDateToXMLGregorianCalendar(employeesEntity.getEmploymentDate()));
 		employee.setPosition(employeesEntity.getPosition());
         employee.setSalary(employeesEntity.getSalary());
         return employee;
-        
-    	} catch (DatatypeConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+        	
     }
 
     public List<EmployeesEntity> convertEmployeesToEmployeeEntities(List<Employee> employees) {
