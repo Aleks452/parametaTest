@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.parameta.com/parameta/parametaEmployees/soap"
+           targetNamespace="http://www.parameta.com/parameta/parametaEmployees/soap" elementFormDefault="qualified">
+
+    <!-- Elemento para obtener información de un empleado por documentNumber -->
+    <xs:element name="getEmployeeByDocumentNumberRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="documentNumber" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Elemento para la respuesta de obtener información por documentNumber -->
+    <xs:element name="getEmployeeByDocumentNumberResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="tns:employee"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+	<!-- Elemento para la respuesta de obtener información por documentNumber -->
+    <xs:element name="postEmployeeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="tns:employee"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="postEmployeeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="tns:employee"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="employee">
+        <xs:sequence>
+            <xs:element name="documentNumber" type="xs:string"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="documentType" type="xs:string"/>
+            <xs:element name="birthDate" type="xs:date"/>
+            <xs:element name="employmentDate" type="xs:date"/>
+            <xs:element name="position" type="xs:string"/>
+            <xs:element name="salary" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
